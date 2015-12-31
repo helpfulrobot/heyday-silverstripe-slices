@@ -79,9 +79,9 @@ class Slice extends DataObject implements DataObjectPreviewInterface
             $this->setClassName($config['className']);
 
             // Prevent an error occurring when changing the class of an object that hasn't been saved yet
-            if($this->unsavedRelations) {
-                foreach($this->unsavedRelations as $name => $list) {
-                    if(!$this->hasMethod($name)) {
+            if ($this->unsavedRelations) {
+                foreach ($this->unsavedRelations as $name => $list) {
+                    if (!$this->hasMethod($name)) {
                         unset($this->unsavedRelations[$name]);
                     }
                 }
@@ -114,7 +114,7 @@ class Slice extends DataObject implements DataObjectPreviewInterface
     protected function configureFieldTypes(FieldList $fields, array $config)
     {
         $this->modifyFieldWithSetting($fields, $config, 'fieldClass',
-            function(FormField $field, array $config) use ($fields) {
+            function (FormField $field, array $config) use ($fields) {
                 $className = $config['fieldClass'];
                 $fields->replaceField($field->getName(), $className::create($field->getName()));
             }
@@ -129,7 +129,7 @@ class Slice extends DataObject implements DataObjectPreviewInterface
      */
     protected function configureFieldHelp(FieldList $fields, array $config)
     {
-        $this->modifyFieldWithSetting($fields, $config, 'help', function(FormField $field, array $config) {
+        $this->modifyFieldWithSetting($fields, $config, 'help', function (FormField $field, array $config) {
             $field->setRightTitle($config['help']);
         });
     }
@@ -142,7 +142,7 @@ class Slice extends DataObject implements DataObjectPreviewInterface
      */
     protected function configureFieldLabels(FieldList $fields, array $config)
     {
-        $this->modifyFieldWithSetting($fields, $config, 'label', function(FormField $field, array $config) {
+        $this->modifyFieldWithSetting($fields, $config, 'label', function (FormField $field, array $config) {
             $field->setTitle($config['label']);
         });
     }
@@ -277,7 +277,7 @@ class Slice extends DataObject implements DataObjectPreviewInterface
         $previewStylesheets = $this->config()->previewStylesheets;
 
         if (is_array($previewStylesheets)) {
-            foreach($previewStylesheets as $css) {
+            foreach ($previewStylesheets as $css) {
                 Requirements::css($css);
             }
         }
